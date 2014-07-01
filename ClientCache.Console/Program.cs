@@ -10,6 +10,7 @@ namespace ClientCache.Console
     {
         static void Main(string[] args)
         {
+            //Test cache entries
         }
     }
 }
