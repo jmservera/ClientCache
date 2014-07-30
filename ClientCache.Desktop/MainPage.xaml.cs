@@ -15,12 +15,31 @@ using System.Windows.Shapes;
 
 namespace ClientCache.Desktop
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : NavigationWindow
+    public class Commands
     {
-        public MainWindow()
+        public Commands()
+        {
+
+        }
+        public ICommand NoCodeCommand
+        {
+            get
+            {
+                return new RelayCommand((o) =>
+                {
+                    NavigationService.GetNavigationService((DependencyObject)o)
+                        .Navigate(new ImagesTest());
+                });
+            }
+        }
+    }
+    /// <summary>
+    /// Interaction logic for MainPage.xaml
+    /// </summary>
+    public partial class MainPage : Page
+    {
+
+        public MainPage()
         {
             InitializeComponent();
         }

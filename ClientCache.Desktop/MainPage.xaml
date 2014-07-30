@@ -1,0 +1,24 @@
+﻿<Page x:Class="ClientCache.Desktop.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      xmlns:local="clr-namespace:ClientCache.Desktop"
+      d:DesignHeight="300" d:DesignWidth="300"
+	Title="MainPage">
+
+    <Grid>
+        <Grid.Resources>
+            <local:Commands x:Key="Commands"/>
+            <Style TargetType="Button">
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="Height" Value="55"/>
+            </Style>
+        </Grid.Resources>
+        <StackPanel DataContext="{StaticResource Commands}">
+            <Button Command="{Binding NoCodeCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" >No code cache</Button>
+            <Button Command="{Binding CodedCacheCommand}">Coded cache</Button>
+        </StackPanel>
+    </Grid>
+</Page>

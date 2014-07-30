@@ -1,25 +1,6 @@
-﻿<Window x:Class="ClientCache.Desktop.MainWindow"
+﻿<NavigationWindow x:Class="ClientCache.Desktop.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-        <Image Source="https://farm2.staticflickr.com/1381/1310759230_9203a83da3.jpg"/>
-        <Image Grid.Column="1">
-            <Image.Source>
-                <BitmapImage UriCachePolicy="Revalidate" 
-                            UriSource="https://farm3.staticflickr.com/2345/2077570455_03891081db.jpg"/>
-            </Image.Source>
-        </Image>
-        <Image Grid.Column="2">
-            <Image.Source>
-                <BitmapImage UriCachePolicy="CacheIfAvailable" 
-                            UriSource="https://farm3.staticflickr.com/2272/1973927918_ce00011ef5.jpg"/>
-            </Image.Source>
-        </Image>
-    </Grid>
-</Window>
+        Title="MainWindow" Height="350" Width="525" Source="MainPage.xaml">
+
+</NavigationWindow>

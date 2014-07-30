@@ -6,10 +6,9 @@
     class Program
     {
         static string[] pictures = new string[]{
-"https://farm2.staticflickr.com/1381/1310759230_9203a83da3.jpg",
-"https://farm3.staticflickr.com/2345/2077570455_03891081db.jpg",
-"https://farm3.staticflickr.com/2272/1973927918_ce00011ef5.jpg"
-};
+            "http://stlab.adobe.com/wiki/images/d/d3/Test.pdf",
+            "http://media.w3.org/2010/05/sintel/trailer.mp4"
+            };
 
         static void Main(string[] args)
         {

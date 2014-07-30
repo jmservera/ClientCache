@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace ClientCache.Desktop
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ImagesTest.xaml
     /// </summary>
-    public partial class MainWindow : NavigationWindow
+    public partial class ImagesTest : Page
     {
-        public MainWindow()
+        public ImagesTest()
         {
             InitializeComponent();
         }
