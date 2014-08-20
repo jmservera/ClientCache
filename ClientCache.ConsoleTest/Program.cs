@@ -12,6 +12,7 @@
 
         static void Main(string[] args)
         {
+
             var index = 0;
             while (true)
             {
@@ -24,10 +25,10 @@
                 Console.WriteLine("Start WebRequest without headers");
                 Stopwatch sw = Stopwatch.StartNew();
                 var response = request.GetResponse();
-                byte[] file = readAllBytes(response);
+                int fileLength = readAllBytes(response);
 
                 Console.WriteLine("Simple WebRequest Ellapsed: {0} FileLength: {1} IsFromCache: {2}",
-                    sw.ElapsedMilliseconds, file.Length, response.IsFromCache);
+                    sw.ElapsedMilliseconds, fileLength, response.IsFromCache);
 
                 var lastModified= response.Headers[System.Net.HttpResponseHeader.LastModified];
 
@@ -42,40 +43,50 @@
                 sw = Stopwatch.StartNew();
                 try
                 {
-                    file=new byte[0];
                     response = request.GetResponse();
-                    file = readAllBytes(response);
+                    fileLength = readAllBytes(response);
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                 }
-                Console.WriteLine("WebRequest Ellapsed: {1} FileLenght: {2}", lastModified, sw.ElapsedMilliseconds, file.Length);
+                Console.WriteLine("WebRequest Ellapsed: {1} FileLenght: {2}", lastModified, sw.ElapsedMilliseconds, fileLength);
 
                 Console.WriteLine();
-                Console.WriteLine("Press return.");
+                Console.WriteLine("Press return to continue, CTRL+C to finish.");
                 Console.ReadLine();
+
             }
         }
 
-        private static byte[] readAllBytes(System.Net.WebResponse response)
+        private static int readAllBytes(System.Net.WebResponse response)
         {
+            var appData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            var path = System.IO.Path.Combine(appData, "jmservera\\ClientCache");
+            System.IO.Directory.CreateDirectory(path);
+
+            var filePath = System.IO.Path.Combine(path, response.ResponseUri.LocalPath.Replace('/','_'));
+
             Console.Write("Reading stream ");
             using (var stream = response.GetResponseStream())
             {
-                using (var m = new System.IO.MemoryStream())
+                using (var m = new System.IO.FileStream(filePath, System.IO.FileMode.OpenOrCreate))
                 {
+                    m.SetLength(0);
                     byte[] buffer = new byte[4096];
                     int bytesread;
+                    int totalBytes=0;
                     while ((bytesread = stream.Read(buffer, 0, buffer.Length)) > 0)
                     {
-                        m.Write(buffer, 0, bytesread);
+                        totalBytes += bytesread;
+                        m.Write( buffer, 0, bytesread);
                         Console.Write('.');
                     }
                     Console.WriteLine();
-                    return m.ToArray();
+                    return totalBytes;
                 }
             }
+            
         }
     }
 }
